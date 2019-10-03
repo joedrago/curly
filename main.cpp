@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <curl/curl.h>
 
-#define SKIP_PEER_VERIFICATION
-#define SKIP_HOSTNAME_VERIFICATION
+//#define SKIP_PEER_VERIFICATION
+//#define SKIP_HOSTNAME_VERIFICATION
 
 static size_t write_data(void *ptr, size_t size, size_t nmemb, void *stream)
 {
@@ -37,6 +37,8 @@ int main(int argc, char *argv[])
 
         /* send all data to this function  */ 
         curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_data);
+
+        curl_easy_setopt(curl, CURLOPT_TIMEOUT, 30L);
 
         /* open the header file */ 
         headerfile = fopen(headerFilename, "wb");
